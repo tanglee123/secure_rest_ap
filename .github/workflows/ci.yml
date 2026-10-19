@@ -6,33 +6,27 @@ on:
     branches: [ main ]
 
 jobs:
-  security‑scan:
-    runs‑on: ubuntu‑latest
+  security-scan:
+    runs-on: ubuntu-latest
     steps:
-      ‑ name: Checkout code
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      ‑ name: Setup Python
-        uses: actions/setup‑python@v5
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
-          python‑version: "3.11"
+          python-version: "3.11"
 
-      ‑ name: Install dependencies
+      - name: Install dependencies
         run: |
-          python ‑m pip install ‑‑upgrade pip
-          pip install ‑r requirements.txt
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
       # SAST静态代码扫描 bandit
-      ‑ name: Run SAST Bandit scan
-        run: bandit ‑r . ‑f json ‑o bandit_report.json
+      - name: Run SAST Bandit scan
+        run: bandit -r . -f json -o bandit_report.json
 
       # SCA依赖漏洞扫描 safety
-      ‑ name: Run SCA safety check
-        run: safety check ‑‑json > safety_report.json
-
-      ‑ name: Upload scan reports
-        uses: actions/upload‑artifact@v4
-        with:
-          name: security‑reports
-          path: "*.json"
+      - name: Run SCA safety check
+        run: safety check
 
