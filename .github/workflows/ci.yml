@@ -32,4 +32,5 @@ jobs:
       # SCA依赖漏洞扫描 safety
       # || true: safety发现漏洞也不把CI标红
       - name: Run SCA safety check
-        run: safety check --ignore SFTY-20260721-58460 --ignore 84961 || true
+        run: safety scan --ignore SFTY-20260721-58460 || true
+
