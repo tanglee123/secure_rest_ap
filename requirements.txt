@@ -4,4 +4,5 @@ PyJWT>=2.12.2
 bcrypt==4.0.1
 bandit>=1.7.7
 safety==2.3.5
-
+setuptools>=83.0.0
+wheel>=0.46.2
