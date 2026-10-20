@@ -6,7 +6,7 @@ import datetime
 from markupsafe import escape
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = "my-super-secret-key-change-me-in-production"
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'my-super-secret-key-change-me-in-production')
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///app.db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
