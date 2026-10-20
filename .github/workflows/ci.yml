@@ -30,8 +30,8 @@ jobs:
         run: bandit -r . -f json -o bandit_report.json || true
 
       # SCA依赖漏洞扫描 safety
-      # --disable-auth：关闭safety交互式登录，CI环境正常运行
-      # || true：safety检出漏洞不把CI标红
+      # --disable-auth：关闭鉴权；--offline：完全离线，禁止联网登录交互
+      # || true：检出漏洞不把CI标红，用于实验演示
       - name: Run SCA safety check
-        run: safety scan --disable-auth || true
+        run: safety scan --disable-auth --offline || true
 
