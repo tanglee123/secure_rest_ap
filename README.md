@@ -42,10 +42,10 @@ Two security scanners run automatically on push / pull‑request to \`main\` bra
 ![Bandit SAST scan result](./screenshots/bandit_scan.png)
 ![Safety SCA scan result](./screenshots/safety_scan.png)
 
-Scan conclusion:
-Bandit SAST found only low‑risk warning about hard‑coded SECRET_KEY; no medium/high risks in our source code.
-SCA scan found total 5 vulnerabilities, all belong to development‑only packages (setuptools and bandit). Core runtime dependencies Flask and PyJWT have zero detected vulnerabilities.
-Remediation suggestion: separate production and development dependencies in real deployment.
+Scan conclusion: Bandit SAST found only low-risk warning about hard-coded SECRET_KEY; no medium/high risks in our source code.
+SCA scan found total 2 vulnerabilities, all belong to build-time / CI-only packages (setuptools and wheel).
+Core runtime dependencies Flask and PyJWT have zero detected vulnerabilities. Remediation suggestion: separate production and development dependencies in real deployment.
+
 
 > Debug note: Newest setuptools removed pkg_resources module required by safety, we downgraded setuptools to 65.5.0 to keep SCA scanner functional.
 
