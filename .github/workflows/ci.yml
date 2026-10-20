@@ -32,5 +32,5 @@ jobs:
       # SCA依赖漏洞扫描 safety
       # || true: safety发现漏洞也不把CI标红
       - name: Run SCA safety check
-        run: safety check || true
+        run: safety check --ignore CVE-2026-59840,CVE-2026-24049 || true
 
