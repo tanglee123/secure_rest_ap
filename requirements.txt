@@ -4,4 +4,3 @@ PyJWT>=2.12.2
 bcrypt==4.0.1
 bandit==1.7.5
 safety==2.3.5
-nltk>=3.10.4
