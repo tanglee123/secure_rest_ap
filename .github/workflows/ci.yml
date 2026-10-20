@@ -25,12 +25,13 @@ jobs:
           pip list | grep -E "bandit|pbr|setuptools|safety"
 
       # SAST静态代码扫描 bandit
-      # || true: 就算bandit扫出漏洞，也不终止CI流水线，仅输出报告
+      # || true: bandit找到漏洞也不会终止CI流水线，仅输出报告
       - name: Run SAST Bandit scan
         run: bandit -r . -f json -o bandit_report.json || true
 
       # SCA依赖漏洞扫描 safety
-      # || true: safety发现漏洞也不把CI标红
+      # --disable-auth：关闭safety交互式登录，CI环境正常运行
+      # || true：safety检出漏洞不把CI标红
       - name: Run SCA safety check
-        run: safety scan --ignore SFTY-20260721-58460 || true
+        run: safety scan --disable-auth || true
 
