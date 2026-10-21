@@ -32,12 +32,16 @@ jobs:
       # SCA依赖漏洞扫描 safety
       # --disable-auth：关闭鉴权；--offline：完全离线，禁止联网登录交互
       # || true：检出漏洞不把CI标红，用于实验演示
-      - name: Install dependencies for Snyk
-        run: pip install -r requirements.txt
-
-      - name: Run SCA Snyk scan
-        uses: snyk/actions/python@master
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      - name: Run SCA OWASP Dependency-Check
+        uses: dependency-check/Dependency-Check_Action@main
+        id: Depcheck
         with:
-          args: --severity-threshold=high
+          project: 'secure_rest_api'
+          path: '.'
+          format: 'HTML'
+          out: 'reports'
+          args: >
+            --enableExperimental
+            --scan .
+            --format JSON
+            --out reports
