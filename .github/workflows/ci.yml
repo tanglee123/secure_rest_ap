@@ -32,5 +32,12 @@ jobs:
       # SCA依赖漏洞扫描 safety
       # --disable-auth：关闭鉴权；--offline：完全离线，禁止联网登录交互
       # || true：检出漏洞不把CI标红，用于实验演示
-      - name: Run SCA safety check
-        run: safety --key ${{ secrets.SAFETY_API_KEY }} scan || true
+      - name: Install dependencies for Snyk
+        run: pip install -r requirements.txt
+
+      - name: Run SCA Snyk scan
+        uses: snyk/actions/python@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --severity-threshold=high
