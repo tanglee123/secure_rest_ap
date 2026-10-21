@@ -33,5 +33,4 @@ jobs:
       # --disable-auth：关闭鉴权；--offline：完全离线，禁止联网登录交互
       # || true：检出漏洞不把CI标红，用于实验演示
       - name: Run SCA safety check
-        run: safety check || true
-
+        run: safety --key ${{ secrets.SAFETY_API_KEY }} scan || true
